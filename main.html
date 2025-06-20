@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare Plus - Your Trusted Medical Shop</title>
+    
+    <!-- Add your tracking scripts here -->
+    <!-- Google Analytics -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script> -->
+    
+    <!-- Microsoft Clarity -->
+    <!-- <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "CLARITY_PROJECT_ID");
+    </script> -->
+    
+    <!-- Hotjar -->
+    <!-- <script>
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:HOTJAR_SITE_ID,hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    </script> -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c5aa0;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #2c5aa0;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-bar {
+            padding: 0.5rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-bar:focus {
+            border-color: #2c5aa0;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #2c5aa0;
+            color: white;
+            border: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        .page {
+            display: none;
+            background: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            background: white;
+            color: #ff6b6b;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .buy-btn {
+            background: #2c5aa0;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .buy-btn:hover {
+            background: #1e3a5f;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #2c5aa0;
+        }
+
+        .submit-btn {
+            background: #28a745;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #1e7e34;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .gallery-item {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            height: 200px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Download Button */
+        .download-btn {
+            background: #17a2b8;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 1rem 0;
+        }
+
+        .download-btn:hover {
+            background: #117a8b;
+        }
+
+        /* Newsletter CTA */
+        .newsletter-cta {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .newsletter-input {
+            padding: 1rem;
+            border: none;
+            border-radius: 25px;
+            min-width: 250px;
+            outline: none;
+        }
+
+        .newsletter-btn {
+            background: #ff6b6b;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background: #ee5a24;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo" onclick="showPage('home')">🏥 MediCare Plus</a>
+                <ul class="nav-links">
+                    <li><a href="#" onclick="showPage('home')" class="active">Home</a></li>
+                    <li><a href="#" onclick="showPage('about')">About</a></li>
+                    <li><a href="#" onclick="showPage('services')">Services</a></li>
+                    <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+                    <li><a href="#" onclick="showPage('gallery')">Gallery</a></li>
+                </ul>
+                <div class="search-container">
+                    <input type="text" class="search-bar" placeholder="Search medicines..." id="searchInput">
+                    <button class="search-btn" onclick="performSearch()">🔍</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <div class="hero">
+                <h1>Welcome to MediCare Plus</h1>
+                <p>Your trusted partner in health and wellness. Quality medicines at affordable prices.</p>
+                <button class="cta-button" onclick="showPage('contact')">Get Started Today</button>
+            </div>
+
+            <h2>Featured Products</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-icon">💊</div>
+                    <h3>Prescription Medicines</h3>
+                    <p>Authentic prescription drugs from certified manufacturers</p>
+                    <p><strong>Starting from ₹50</strong></p>
+                    <button class="buy-btn" onclick="trackPurchase('prescription-medicines')">Buy Now</button>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">🩹</div>
+                    <h3>First Aid Supplies</h3>
+                    <p>Complete first aid kits and medical supplies</p>
+                    <p><strong>Starting from ₹150</strong></p>
+                    <button class="buy-btn" onclick="trackPurchase('first-aid')">Buy Now</button>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">🌿</div>
+                    <h3>Herbal Products</h3>
+                    <p>Natural and ayurvedic medicines for holistic health</p>
+                    <p><strong>Starting from ₹80</strong></p>
+                    <button class="buy-btn" onclick="trackPurchase('herbal-products')">Buy Now</button>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">🩺</div>
+                    <h3>Medical Equipment</h3>
+                    <p>Digital thermometers, BP monitors, and more</p>
+                    <p><strong>Starting from ₹500</strong></p>
+                    <button class="buy-btn" onclick="trackPurchase('medical-equipment')">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Download CTA -->
+            <div style="text-align: center; margin: 3rem 0;">
+                <h3>Download Our Medicine Catalog</h3>
+                <p>Get comprehensive information about all our products</p>
+                <a href="#" class="download-btn" onclick="trackDownload('medicine-catalog')">📄 Download Catalog</a>
+            </div>
+
+            <!-- Newsletter CTA -->
+            <div class="newsletter-cta">
+                <h2>Stay Updated with Health Tips!</h2>
+                <p>Subscribe to our newsletter for exclusive offers and health advice</p>
+                <div class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email" id="newsletterEmail">
+                    <button class="newsletter-btn" onclick="subscribeNewsletter()">Subscribe Now</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Page -->
+        <div id="about" class="page">
+            <h1>About MediCare Plus</h1>
+            <p>Established in 2010, MediCare Plus has been serving the community with quality healthcare products and services. We are committed to making healthcare accessible and affordable for everyone.</p>
+            
+            <h2>Our Mission</h2>
+            <p>To provide authentic, quality medicines and healthcare products while ensuring exceptional customer service and building lasting relationships with our community.</p>
+            
+            <h2>Why Choose Us?</h2>
+            <ul style="margin: 2rem 0;">
+                <li><strong>Quality Assurance:</strong> All products are sourced from certified manufacturers</li>
+                <li><strong>Expert Staff:</strong> Qualified pharmacists available for consultation</li>
+                <li><strong>Affordable Prices:</strong> Competitive pricing with regular discounts</li>
+                <li><strong>Fast Delivery:</strong> Same-day delivery within the city</li>
+                <li><strong>24/7 Service:</strong> Emergency medicines available round the clock</li>
+            </ul>
+
+            <div style="text-align: center; margin: 3rem 0;">
+                <button class="cta-button" onclick="showPage('contact')">Contact Our Experts</button>
+            </div>
+        </div>
+
+        <!-- Services Page -->
+        <div id="services" class="page">
+            <h1>Our Services</h1>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-icon">🚚</div>
+                    <h3>Home Delivery</h3>
+                    <p>Free home delivery for orders above ₹500. Same-day delivery available.</p>
+                    <button class="buy-btn" onclick="trackServiceInterest('home-delivery')">Learn More</button>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">👨‍⚕️</div>
+                    <h3>Pharmacist Consultation</h3>
+                    <p>Free consultation with our qualified pharmacists for all your health queries.</p>
+                    <button class="buy-btn" onclick="trackServiceInterest('consultation')">Book Now</button>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">📱</div>
+                    <h3>Online Ordering</h3>
+                    <p>Order medicines online through our website or mobile app.</p>
+                    <button class="buy-btn" onclick="trackServiceInterest('online-ordering')">Get App</button>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">💳</div>
+                    <h3>Insurance Claims</h3>
+                    <p>We help process insurance claims for eligible medical expenses.</p>
+                    <button class="buy-btn" onclick="trackServiceInterest('insurance')">Apply Now</button>
+                </div>
+            </div>
+
+            <h2>Prescription Upload</h2>
+            <div class="form-group">
+                <label for="prescriptionFile">Upload Your Prescription:</label>
+                <input type="file" id="prescriptionFile" accept=".jpg,.jpeg,.png,.pdf">
+            </div>
+            <button class="submit-btn" onclick="uploadPrescription()">Upload Prescription</button>
+
+            <div style="text-align: center; margin: 3rem 0;">
+                <h3>Emergency Services</h3>
+                <p>Need medicines urgently? Call us now!</p>
+                <button class="cta-button" onclick="trackEmergencyCall()">📞 Call Emergency Hotline</button>
+            </div>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact" class="page">
+            <h1>Contact Us</h1>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;">
+                <div>
+                    <h2>Get in Touch</h2>
+                    <form id="contactForm" onsubmit="submitContactForm(event)">
+                        <div class="form-group">
+                            <label for="name">Full Name:</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number:</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inquiry">Type of Inquiry:</label>
+                            <select id="inquiry" name="inquiry" required>
+                                <option value="">Select...</option>
+                                <option value="general">General Query</option>
+                                <option value="prescription">Prescription Help</option>
+                                <option value="delivery">Delivery Issue</option>
+                                <option value="complaint">Complaint</option>
+                                <option value="feedback">Feedback</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message:</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+                
+                <div>
+                    <h2>Visit Our Store</h2>
+                    <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px;">
+                        <h3>📍 Address</h3>
+                        <p>123 Health Street, Medical District<br>
+                        Mumbai, Maharashtra 400001<br>
+                        India</p>
+                        
+                        <h3>📞 Phone</h3>
+                        <p>+91 98765 43210<br>
+                        Emergency: +91 98765 43211</p>
+                        
+                        <h3>⏰ Hours</h3>
+                        <p>Monday - Saturday: 8:00 AM - 10:00 PM<br>
+                        Sunday: 9:00 AM - 9:00 PM<br>
+                        Emergency: 24/7</p>
+                        
+                        <h3>✉️ Email</h3>
+                        <p>info@medicareplus.com<br>
+                        support@medicareplus.com</p>
+                    </div>
+
+                    <div style="margin-top: 2rem; text-align: center;">
+                        <button class="cta-button" onclick="trackDirections()">🗺️ Get Directions</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery Page -->
+        <div id="gallery" class="page">
+            <h1>Our Gallery</h1>
+            <p>Take a look at our modern facilities and wide range of products</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="viewImage('store-front')">
+                    <span>🏪 Store Front</span>
+                </div>
+                <div class="gallery-item" onclick="viewImage('medicine-section')">
+                    <span>💊 Medicine Section</span>
+                </div>
+                <div class="gallery-item" onclick="viewImage('consultation-room')">
+                    <span>👨‍⚕️ Consultation Room</span>
+                </div>
+                <div class="gallery-item" onclick="viewImage('equipment-display')">
+                    <span>🩺 Equipment Display</span>
+                </div>
+                <div class="gallery-item" onclick="viewImage('herbal-section')">
+                    <span>🌿 Herbal Section</span>
+                </div>
+                <div class="gallery-item" onclick="viewImage('staff-team')">
+                    <span>👥 Our Team</span>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 3rem 0;">
+                <h3>Want to Visit Us?</h3>
+                <p>Schedule a tour of our facilities</p>
+                <button class="cta-button" onclick="scheduleVisit()">Schedule a Visit</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 MediCare Plus. All rights reserved. | Made with ❤️ for better health</p>
+            <p>Licensed Pharmacy | Reg. No: MH/12345/2024</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation and Page Management
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Track page view for analytics
+            trackPageView(pageId);
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Search functionality
+        function performSearch() {
+            const query = document.getElementById('searchInput').value;
+            if (query) {
+                trackSearch(query);
+                alert(`Searching for: ${query}\n\nResults would appear here in a real application.`);
+                // In a real app, this would filter products or redirect to search results
+            }
+        }
+
+        // Handle Enter key in search
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // Contact form submission
+        function submitContactForm(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            
+            // Track form submission
+            trackFormSubmission('contact', data);
+            
+            alert('Thank you for your message! We will get back to you within 24 hours.');
+            event.target.reset();
+        }
+
+        // Newsletter subscription
+        function subscribeNewsletter() {
+            const email = document.getElementById('newsletterEmail').value;
+            if (email) {
+                trackNewsletterSignup(email);
+                alert('Thank you for subscribing! You will receive our latest updates and offers.');
+                document.getElementById('newsletterEmail').value = '';
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        }
+
+        // Prescription upload
+        function uploadPrescription() {
+            const file = document.getElementById('prescriptionFile').files[0];
+            if (file) {
+                trackPrescriptionUpload(file.name);
+                alert('Prescription uploaded successfully! Our pharmacist will review it and contact you shortly.');
+            } else {
+                alert('Please select a prescription file to upload.');
+            }
+        }
+
+        // Analytics Tracking Functions
+        function trackPageView(page) {
+            console.log(`Page View: ${page}`);
+            // Google Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('config', 'GA_MEASUREMENT_ID', {
+                    page_title: page,
+                    page_location: window.location.href + '#' + page
+                });
+            }
+        }
+
+        function trackPurchase(product) {
+            console.log(`Purchase Intent: ${product}`);
+            alert(`Added ${product} to cart! Redirecting to checkout...`);
+            
+            // Track conversion event
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'add_to_cart', {
+                    currency: 'INR',
+                    value: 100,
+                    items: [{
+                        item_id: product,
+                        item_name: product,
+                        category: 'medicines',
+                        quantity: 1,
+                        price: 100
+                    }]
+                });
+            }
+        }
+
+        function trackDownload(item) {
+            console.log(`Download: ${item}`);
+            
+            // Track download event
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'file_download', {
+                    file_name: item + '.pdf',
+                    link_url: '#download-' + item
+                });
+            }
+            
+            // Simulate download
+            alert('Download started! The catalog will be available in your downloads folder.');
+        }
+
+        function trackSearch(query) {
+            console.log(`Search: ${query}`);
+            
+            // Track search event
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'search', {
+                    search_term: query
+                });
+            }
+        }
+
+        function trackFormSubmission(formType, data) {
+            console.log(`Form Submission: ${formType}`, data);
+            
+            // Track form submission
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'form_submit', {
+                    form_name: formType,
+                    engagement_time_msec: 30000
+                });
+            }
+        }
+
+        function trackNewsletterSignup(email) {
+            console.log(`Newsletter Signup: ${email}`);
+            
+            // Track signup event
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'sign_up', {
+                    method: 'newsletter'
+                });
+            }
+        }
+
+        function trackServiceInterest(service) {
+            console.log(`Service Interest: ${service}`);
+            alert(`Thank you for your interest in ${service}! Our team will contact you soon.`);
+            
+            // Track engagement
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'generate_lead', {
+                    currency: 'INR',
+                    value: 50,
+                    service: service
+                });
+            }
+        }
+
+        function trackEmergencyCall() {
+            console.log('Emergency Call Initiated');
+            alert('Connecting you to our emergency hotline: +91 98765 43211');
+            
+            // Track emergency engagement
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'emergency_contact', {
+                    contact_method: 'phone'
+                });
+            }
+        }
+
+        function trackDirections() {
+            console.log('Directions Requested');
+            alert('Opening Google Maps for directions to our store...');
+            
+            // Track directions request
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'get_directions', {
+                    location: 'medicare_plus_store'
+                });
+            }
+        }
+
+        function trackPrescriptionUpload(filename) {
+            console.log(`Prescription Upload: ${filename}`);
+            
+            // Track prescription upload
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'prescription_upload', {
+                    file_type: filename.split('.').pop(),
+                    engagement_time_msec: 45000
+                });
+            }
+        }
+
+        function viewImage(imageType) {
+            console.log(`Gallery Image Viewed: ${imageType}`);
+            alert(`Viewing ${imageType} image. In a real application, this would open a lightbox or larger view.`);
+            
+            // Track image view
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'view_item', {
+                    item_id: imageType,
+                    item_name: imageType,
+                    item_category: 'gallery'
+                });
+            }
+        }
+
+        function scheduleVisit() {
+            console.log('Visit Scheduling Request');
+            alert('Thank you for your interest! Please call us at +91 98765 43210 to schedule your visit.');
+            
+            // Track visit scheduling interest
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'schedule_visit', {
+                    engagement_time_msec: 20000
+                });
+            }
+        }
+
+        // Scroll tracking for analytics
+        let maxScrollDepth = 0;
+        let scrollTimer;
+
+        window.addEventListener('scroll', function() {
+            clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = Math.round((scrollTop / docHeight) * 100);
+                
+                if (scrollPercent > maxScrollDepth) {
+                    maxScrollDepth = scrollPercent;
+                    
+                    // Track scroll depth at 25%, 50%, 75%, 100%
+                    if (scrollPercent >= 25 && scrollPercent < 50 && maxScrollDepth >= 25) {
+                        trackScrollDepth(25);
+                    } else if (scrollPercent >= 50 && scrollPercent < 75 && maxScrollDepth >= 50) {
+                        trackScrollDepth(50);
+                    } else if (scrollPercent >= 75 && scrollPercent < 100 && maxScrollDepth >= 75) {
+                        trackScrollDepth(75);
+                    } else if (scrollPercent >= 100) {
+                        trackScrollDepth(100);
+                    }
+                }
+            }, 100);
+        });
+
+        function trackScrollDepth(depth) {
+            console.log(`Scroll Depth: ${depth}%`);
+            
+            // Track scroll depth
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'scroll', {
+                    percent_scrolled: depth
+                });
+            }
+        }
+
+        // Track time on page
+        let startTime = Date.now();
+        let timeOnPage = 0;
+
+        // Update time on page every 15 seconds
+        setInterval(function() {
+            timeOnPage = Math.round((Date.now() - startTime) / 1000);
+            
+            // Track engagement every 30 seconds
+            if (timeOnPage % 30 === 0 && timeOnPage > 0) {
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'page_engagement', {
+                        engagement_time_msec: timeOnPage * 1000
+                    });
+                }
+            }
+        }, 15000);
+
+        // Track when user leaves page
+        window.addEventListener('beforeunload', function() {
+            const finalTimeOnPage = Math.round((Date.now() - startTime) / 1000);
+            
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'page_exit', {
+                    engagement_time_msec: finalTimeOnPage * 1000,
+                    max_scroll_depth: maxScrollDepth
+                });
+            }
+        });
+
+        // Track clicks on external links or important elements
+        document.addEventListener('click', function(e) {
+            const clickedElement = e.target;
+            
+            // Track CTA button clicks
+            if (clickedElement.classList.contains('cta-button')) {
+                console.log('CTA Button Clicked');
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'cta_click', {
+                        button_text: clickedElement.textContent.trim(),
+                        page_location: window.location.href
+                    });
+                }
+            }
+            
+            // Track buy button clicks
+            if (clickedElement.classList.contains('buy-btn')) {
+                console.log('Buy Button Clicked');
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'purchase_intent', {
+                        button_text: clickedElement.textContent.trim()
+                    });
+                }
+            }
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('MediCare Plus Website Loaded');
+            trackPageView('home');
+            
+            // Track initial page load
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'page_view', {
+                    page_title: 'Home - MediCare Plus',
+                    page_location: window.location.href
+                });
+            }
+        });
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Simulate real user interactions for demo purposes
+        function simulateUserActivity() {
+            console.log('Simulating user activity for analytics demo...');
+            
+            // Simulate some user interactions after page load
+            setTimeout(() => {
+                trackSearch('paracetamol');
+            }, 5000);
+            
+            setTimeout(() => {
+                trackPurchase('prescription-medicines');
+            }, 10000);
+            
+            setTimeout(() => {
+                trackDownload('medicine-catalog');
+            }, 15000);
+        }
+
+        // Uncomment the line below to simulate user activity for testing
+        // simulateUserActivity();
+    </script>
+</body>
+</html>
